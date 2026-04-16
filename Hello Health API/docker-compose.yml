@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    container_name: hello-health-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app                  # live reload during development
+      - sqlite_data:/app/data   # persist SQLite database
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+volumes:
+  sqlite_data:
